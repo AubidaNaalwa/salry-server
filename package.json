@@ -1,7 +1,7 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/server.ts",
   "license": "MIT",
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -16,8 +16,9 @@
     "jsonwebtoken": "^8.5.1"
   },
   "scripts": {
+    "start": "node dist/server.js",
     "build": "tsc --project ./",
-    "start:dev": "nodemon ./server.ts",
+    "start:dev": "nodemon ./src/server.ts",
     "start:prod": "node dist/server.js"
   },
   "devDependencies": {
