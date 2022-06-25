@@ -9,7 +9,7 @@ export interface AuthRequest extends Request {
 const config = process.env;
 
 const verifyToken = (req: AuthRequest, res:Response, next:NextFunction) => {
-  const token = req.cookies?.token;
+  const token = req.query.token || req.cookies?.token;
   if (!token || !config.TOKEN_KEY) {
     return res.status(403).send("A token is required for authentication");
   }
