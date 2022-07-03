@@ -34,10 +34,10 @@ router.post('/ticket', async (req:AuthRequest , res) => {
     }
 })
 
-router.delete('/ticket/:id', async (req:AuthRequest , res) => {
+router.delete('/delete-ticket/:id', async (req:AuthRequest , res) => {
     try{
         const ticketId= req.params.id
-        if(ticketId) { 
+        if(!ticketId) { 
             return res.send('validation failed')
         }
         await TicketSchema.deleteOne({_id: ticketId});
