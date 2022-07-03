@@ -44,7 +44,7 @@ router.delete('/ticket/:id', async (req:AuthRequest , res) => {
         res.status(200).send("ok")
     }catch(err) { 
         res.status(404).send(
-            "fail loading tickets"
+            "fail deleting ticket"
         )
     }
 })
