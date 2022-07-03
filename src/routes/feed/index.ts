@@ -1,7 +1,7 @@
 import express from 'express'
 import TicketSchema from '../../mongo-models/feed/Ticket'
 import TargetSchema from '../../mongo-models/feed/Target'
-import { ticketValidation } from './validate'
+import { ticketValidation, targetValidation } from './validate'
 import { AuthRequest } from '../../middlewares/auth'
 
 const router = express.Router()
@@ -75,6 +75,23 @@ router.get('/targets', async (req:AuthRequest, res) => {
     }catch(err) { 
         res.status(404).send(
             "fail loading targets"
+        )
+    }
+})
+
+router.post('/target', async (req:AuthRequest , res) => {
+    try{
+        const email = req.user
+        const target = targetValidation.validate(req.body)
+        if(target.error) { 
+            return res.send('validation failed')
+        }
+        const mongooTarget= await TargetSchema.create({...target.value, email})
+        await mongooTarget.save()
+        res.status(200).send("ok")
+    }catch(err) { 
+        res.status(404).send(
+            "fail loading TargetSchema"
         )
     }
 })
