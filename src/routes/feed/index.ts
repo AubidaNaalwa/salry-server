@@ -34,4 +34,19 @@ router.post('/ticket', async (req:AuthRequest , res) => {
     }
 })
 
+router.delete('/ticket/:id', async (req:AuthRequest , res) => {
+    try{
+        const ticketId= req.params.id
+        if(ticketId) { 
+            return res.send('validation failed')
+        }
+        await TicketSchema.deleteOne({_id: ticketId});
+        res.status(200).send("ok")
+    }catch(err) { 
+        res.status(404).send(
+            "fail loading tickets"
+        )
+    }
+})
+
 export default router
