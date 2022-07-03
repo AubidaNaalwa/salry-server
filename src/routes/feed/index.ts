@@ -86,6 +86,8 @@ router.post('/target', async (req:AuthRequest , res) => {
         if(target.error) { 
             return res.send('validation failed')
         }
+        const isTargetAlreadyCreated = await TargetSchema.find({email, year: target.value.year, month: target.value.month})
+        if(isTargetAlreadyCreated)  return res.status(404).send('already have month')
         const mongooTarget= await TargetSchema.create({...target.value, email})
         await mongooTarget.save()
         res.status(200).send("ok")
