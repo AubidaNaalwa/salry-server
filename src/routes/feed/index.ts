@@ -98,4 +98,19 @@ router.post('/target', async (req:AuthRequest , res) => {
     }
 })
 
+router.delete('/delete-target/:id', async (req:AuthRequest , res) => {
+    try{
+        const targetId= req.params.id
+        if(!targetId) { 
+            return res.send('validation failed')
+        }
+        await TargetSchema.deleteOne({_id: targetId});
+        res.status(200).send("ok")
+    }catch(err) { 
+        res.status(404).send(
+            "fail deleting target"
+        )
+    }
+})
+
 export default router
