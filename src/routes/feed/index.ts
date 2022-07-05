@@ -113,4 +113,8 @@ router.delete('/delete-target/:id', async (req:AuthRequest , res) => {
     }
 })
 
+router.post('user-details', (req:AuthRequest, res) => { 
+    res.send(req.user)
+} )
+
 export default router
