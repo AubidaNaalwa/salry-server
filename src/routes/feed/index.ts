@@ -113,7 +113,7 @@ router.delete('/delete-target/:id', async (req:AuthRequest , res) => {
     }
 })
 
-router.post('user-details', (req:AuthRequest, res) => { 
+router.post('/user-details', (req:AuthRequest, res) => { 
     res.send({user: req.user})
 } )
 
